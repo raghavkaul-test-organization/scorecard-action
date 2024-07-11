@@ -140,4 +140,17 @@ func printConfigCmd(o *options.Options) *cobra.Command {
 	return c
 }
 
+// func runWithPolicyCmd(o *options.Options) *cobra.Command {
+// 	c := &cobra.Command{
+
+// 	}
+// 	actionCmd.Flags().StringVar(
+// 		&scOpts.PolicyFile,
+// 		"policy-file",
+// 		scOpts.PolicyFile,
+// 		"Policy that defines whether to pass or fail the action status check based on results",
+// 	)
+
+// }
+
 var errHideFlags = errors.New("errors occurred while trying to hide scorecard flags")

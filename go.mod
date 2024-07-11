@@ -12,6 +12,8 @@ require (
 	golang.org/x/net v0.27.0
 )
 
+require github.com/google/go-github/v60 v60.0.0 // indirect
+
 require (
 	cloud.google.com/go v0.112.2 // indirect
 	cloud.google.com/go/auth v0.4.0 // indirect
@@ -126,7 +128,7 @@ require (
 	github.com/google/go-containerregistry v0.19.1 // indirect
 	github.com/google/go-github/v53 v53.2.0 // indirect
 	github.com/google/go-github/v55 v55.0.0 // indirect
-	github.com/google/go-github/v60 v60.0.0 // indirect
+	github.com/google/go-github/v61 v61.0.0
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/osv-scanner v1.7.2 // indirect
@@ -251,7 +253,7 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
+	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/api v0.28.6 // indirect
 	k8s.io/apimachinery v0.28.6 // indirect
 	k8s.io/client-go v0.28.6 // indirect
