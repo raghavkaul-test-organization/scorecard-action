@@ -81,8 +81,15 @@ func New() (*cobra.Command, error) {
 			actionCmd.SetOut(out)
 		}
 
-		cr.Setup(context.Background(), *opts)
+		err := cr.Setup(context.Background(), *opts)
+		if err != nil {
+			panic(err)
+		}
 		cr.Start()
+		if err != nil {
+			panic(err)
+		}
+
 		return nil
 	}
 
