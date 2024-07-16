@@ -21,7 +21,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -82,8 +81,7 @@ func New() (*cobra.Command, error) {
 			actionCmd.SetOut(out)
 		}
 
-		s := strings.Split(opts.GithubRepository, "/")
-		cr.Setup(context.Background(), scOpts.Commit, s[0], s[1])
+		cr.Setup(context.Background(), *opts)
 		cr.Start()
 		return nil
 	}

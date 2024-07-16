@@ -18,9 +18,11 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/google/go-github/v61/github"
+	"github.com/ossf/scorecard-action/options"
 )
 
 type CheckRun struct {
@@ -31,19 +33,21 @@ type CheckRun struct {
 	checkRunID int64
 }
 
-func (c *CheckRun) Setup(ctx context.Context, headSHA, owner, repo string) error {
+func (c *CheckRun) Setup(ctx context.Context, opts options.Options) error {
 	c.ctx = ctx
-	c.owner = owner
-	c.repo = repo
 
-	token := os.Getenv("GITHUB_TOKEN")
+	r := strings.Split(opts.GithubRepository, "/")
+	c.owner = r[0]
+	c.repo = r[1]
+
+	token := os.Getenv(options.EnvGithubAuthToken)
 	client := github.NewClient(nil).WithAuthToken(token)
 
 	c.client = client.Checks
 
-	opts := github.CreateCheckRunOptions{
+	cropts := github.CreateCheckRunOptions{
 		Name:    "scorecard-action",
-		HeadSHA: headSHA,
+		HeadSHA: opts.ScorecardOpts.Commit,
 		// DetailsURL: ,
 		// ExternalID: ,
 		// Status: ,
@@ -54,7 +58,7 @@ func (c *CheckRun) Setup(ctx context.Context, headSHA, owner, repo string) error
 		// Actions: ,
 	}
 
-	cr, _, err := c.client.CreateCheckRun(c.ctx, owner, repo, opts)
+	cr, _, err := c.client.CreateCheckRun(c.ctx, c.owner, c.repo, cropts)
 	if err != nil {
 		return fmt.Errorf("CreateCheckRun: %w", err)
 	}
