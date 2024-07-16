@@ -16,14 +16,17 @@
 package entrypoint
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/ossf/scorecard-action/options"
+	"github.com/ossf/scorecard-action/policies"
 	sccmd "github.com/ossf/scorecard/v5/cmd"
 	sce "github.com/ossf/scorecard/v5/errors"
 	scopts "github.com/ossf/scorecard/v5/options"
@@ -57,6 +60,7 @@ func New() (*cobra.Command, error) {
 		"if set, results will be published (for public repositories only)",
 	)
 
+	cr := policies.CheckRun{}
 	// Adapt scorecard's PreRunE to support an output file
 	// TODO(scorecard): Move this into scorecard
 	var out, stdout *os.File
@@ -77,6 +81,10 @@ func New() (*cobra.Command, error) {
 			os.Stdout = out
 			actionCmd.SetOut(out)
 		}
+
+		s := strings.Split(opts.GithubRepository, "/")
+		cr.Setup(context.Background(), scOpts.Commit, s[0], s[1])
+		cr.Start()
 		return nil
 	}
 
@@ -91,6 +99,10 @@ func New() (*cobra.Command, error) {
 	}
 
 	actionCmd.PersistentPostRun = func(cmd *cobra.Command, args []string) {
+		err := cr.Fail()
+		if err != nil {
+			panic(err)
+		}
 		if out != nil {
 			if _, err = out.Seek(0, io.SeekStart); err == nil {
 				//nolint:errcheck
