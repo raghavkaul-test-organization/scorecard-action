@@ -43,8 +43,7 @@ func (c *Status) SetupAndStart(ctx context.Context, opts options.Options) error 
 	c.owner = r[0]
 	c.repo = r[1]
 
-	fmt.Printf("FIXME opts: %+v\n", opts)
-	c.commitSHA = opts.ScorecardOpts.Commit
+	c.commitSHA = "bff08c671f1d426d19204d89369c49ca99146978"
 
 	token := os.Getenv(options.EnvGithubAuthToken)
 	client := github.NewClient(nil).WithAuthToken(token)
