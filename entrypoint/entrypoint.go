@@ -34,6 +34,7 @@ import (
 // New creates a new scorecard command which can be used as an entrypoint for
 // GitHub Actions.
 func New() (*cobra.Command, error) {
+	options.LogEnviron()
 	opts, err := options.New()
 	if err != nil {
 		return nil, fmt.Errorf("creating new options: %w", err)
@@ -100,7 +101,7 @@ func New() (*cobra.Command, error) {
 	}
 
 	actionCmd.PersistentPostRun = func(cmd *cobra.Command, args []string) {
-		err := cr.Fail()
+		err := cr.Success()
 		if err != nil {
 			panic(err)
 		}

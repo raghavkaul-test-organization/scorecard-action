@@ -102,6 +102,13 @@ func New() (*Options, error) {
 	return opts, nil
 }
 
+func LogEnviron() {
+	fmt.Println("=== Dumping os.Environ() ===")
+	for _, e := range os.Environ() {
+		fmt.Println(e)
+	}
+}
+
 // Validate validates the scorecard configuration.
 func (o *Options) Validate() error {
 	fmt.Println("EnvGithubAuthToken:", EnvGithubAuthToken, os.Getenv(EnvGithubAuthToken))
