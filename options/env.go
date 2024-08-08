@@ -31,6 +31,7 @@ const (
 	EnvGithubEventName         = "GITHUB_EVENT_NAME"
 	EnvGithubRepository        = "GITHUB_REPOSITORY"
 	EnvGithubRef               = "GITHUB_REF"
+	EnvGithubHeadRef           = "GITHUB_HEAD_REF"
 	EnvGithubWorkspace         = "GITHUB_WORKSPACE"
 	EnvGithubAuthToken         = "GITHUB_AUTH_TOKEN" //nolint:gosec
 	EnvScorecardFork           = "SCORECARD_IS_FORK"

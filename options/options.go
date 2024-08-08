@@ -64,6 +64,7 @@ type Options struct {
 	GithubEventName  string `env:"GITHUB_EVENT_NAME"`
 	GithubEventPath  string `env:"GITHUB_EVENT_PATH"`
 	GithubRef        string `env:"GITHUB_REF"`
+	GithubHeadRef    string `env:"GITHUB_HEAD_REF"`
 	GithubRepository string `env:"GITHUB_REPOSITORY"`
 	GithubWorkspace  string `env:"GITHUB_WORKSPACE"`
 	GithubAPIURL     string `env:"GITHUB_API_URL"`
