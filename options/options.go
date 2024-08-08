@@ -79,7 +79,9 @@ type Options struct {
 	InputResultsFormat string `env:"INPUT_RESULTS_FORMAT"`
 
 	PublishResults bool
-	TargetSHA      string
+
+	// Needed to set commit statuses on pull requests
+	TargetSHA string
 }
 
 // New creates a new options set for running scorecard via GitHub Actions.

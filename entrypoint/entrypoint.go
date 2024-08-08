@@ -60,7 +60,7 @@ func New() (*cobra.Command, error) {
 		"if set, results will be published (for public repositories only)",
 	)
 
-	cr := policies.Status{}
+	st := policies.Status{}
 	// Adapt scorecard's PreRunE to support an output file
 	// TODO(scorecard): Move this into scorecard
 	var out, stdout *os.File
@@ -82,7 +82,7 @@ func New() (*cobra.Command, error) {
 			actionCmd.SetOut(out)
 		}
 
-		err := cr.SetupAndStart(context.Background(), *opts)
+		err := st.SetupAndStart(context.Background(), *opts)
 		if err != nil {
 			panic(err)
 		}
@@ -101,7 +101,7 @@ func New() (*cobra.Command, error) {
 	}
 
 	actionCmd.PersistentPostRun = func(cmd *cobra.Command, args []string) {
-		err := cr.Success()
+		err := st.Fail()
 		if err != nil {
 			panic(err)
 		}
