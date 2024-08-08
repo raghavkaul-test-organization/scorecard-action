@@ -32,7 +32,12 @@ import (
 
 // RepoInfo is a struct for repository information.
 type RepoInfo struct {
-	Repo      repo `json:"repository"`
+	Repo        repo `json:"repository"`
+	PullRequest struct {
+		Head struct {
+			SHA string `json:"sha"`
+		} `json:"head"`
+	} `json:"pull_request"`
 	respBytes []byte
 }
 
