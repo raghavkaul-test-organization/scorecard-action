@@ -76,6 +76,7 @@ func (c *Status) SetupAndStart(ctx context.Context, opts options.Options) error 
 	}
 
 	c.repoStatusID = rs.GetID()
+	fmt.Printf("repo status id: %d\n", c.repoStatusID)
 
 	return nil
 }
